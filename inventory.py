@@ -89,6 +89,17 @@ def load_inventory():
     print(f"{FILENAME} not found. Starting with empty inventory.")
     return []
 
+
+def save_inventory(inventory):
+    """Write the inventory (including histories) to inventory.json."""
+    try:
+        with open(FILENAME, "w") as f:
+            json.dump(inventory, f, indent=4)
+        print(f"Inventory saved successfully to {FILENAME}.")
+    except OSError as e:
+        print(f"Error saving inventory: {e}")
+
+
 def read_number(prompt, cast):
     """Prompt until the user enters a valid non-negative number."""
     while True:
@@ -173,11 +184,11 @@ def main():
 
         elif choice == "5":
             print("Saving inventory...")
-            #save_inventory(inventory)
+            save_inventory(inventory)
 
         elif choice == "6":
             print("Saving inventory before exit...")
-            #save_inventory(inventory)
+            save_inventory(inventory)
             print("Thank you for using Inventory Management System.")
             print("Program terminated.")
             break
